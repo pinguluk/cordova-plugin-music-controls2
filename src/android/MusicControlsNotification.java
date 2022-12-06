@@ -284,8 +284,14 @@ public class MusicControlsNotification {
 	}
 
 	public void destroy(){
-		this.notificationManager.cancel(this.notificationID);
 		this.onNotificationDestroyed();
+
+        try { // this is a hack that has to wait on it to come fully out of background mode .. dunno how long to wait, or if there's a notification when it's time
+            Thread.sleep(100);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
+		this.notificationManager.cancel(this.notificationID);
 	}
 
 	protected void onNotificationUpdated(Notification notification) {}
