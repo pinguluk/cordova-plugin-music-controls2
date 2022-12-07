@@ -182,6 +182,7 @@ public class MusicControlsNotification {
 			builder.setTicker(infos.ticker);
 		}
 		
+		builder.setSound(null);
 		builder.setPriority(Notification.PRIORITY_MAX);
 
 		//If 5.0 >= set the controls to be visible on lockscreen
