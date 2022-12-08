@@ -9,12 +9,12 @@ import java.io.InputStream;
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Random;
 import java.util.UUID;
 
 import android.util.Log;
 import android.R;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -39,9 +39,22 @@ public class MusicControlsNotification {
 	private String CHANNEL_ID;
 	private Token token;
 
+	private String getChannelId(Activity cordovaActivity) {
+		SharedPreferences sharedPreferences = cordovaActivity.getSharedPreferences("cordova-plugin-music-controls", Context.MODE_PRIVATE);
+		
+		String r = sharedPreferences.getString("channel_id", null);
+		if (r == null) {
+			r = UUID.randomUUID().toString();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("channel_id", r);
+            editor.commit();
+		}
+		return r;
+	}
+
 	// Public Constructor
 	public MusicControlsNotification(Activity cordovaActivity, int id, Token token){
-		this.CHANNEL_ID = UUID.randomUUID().toString();
+		this.CHANNEL_ID = this.getChannelId(cordovaActivity);
 		this.notificationID = id;
 		this.cordovaActivity = cordovaActivity;
 		Context context = cordovaActivity;
