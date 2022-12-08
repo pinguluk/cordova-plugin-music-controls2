@@ -18,6 +18,7 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 
 import android.media.session.MediaSession.Token;
+import android.media.MediaMetadata;
 
 import android.util.Log;
 import android.app.Activity;
@@ -182,6 +183,8 @@ public class MusicControls extends CordovaPlugin {
 					metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, infos.artist);
 					//album
 					metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_ALBUM, infos.album);
+					// Hide seek bar  (TODO do this if duration is 0?)
+					metadataBuilder.putLong(MediaMetadata.METADATA_KEY_DURATION, -1L);
 
 					Bitmap art = getBitmapCover(infos.cover);
 					if(art != null){
