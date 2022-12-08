@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Build;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.media.session.MediaSession.Token;
 
@@ -86,7 +87,7 @@ public class MusicControlsNotification {
 	public void updateNotification(MusicControlsInfos newInfos){
 		// Check if the cover has changed	
 		if (!newInfos.cover.isEmpty() && (this.infos == null || !newInfos.cover.equals(this.infos.cover))){
-			this.getBitmapCover(newInfos.cover);
+			this.setBitmapCover(newInfos.cover);
 		}
 		this.infos = newInfos;
 		this.createBuilder();
@@ -113,18 +114,22 @@ public class MusicControlsNotification {
 		this.onNotificationUpdated(noti);
 	}
 
-	// Get image from url
-	private void getBitmapCover(String coverURL){
+	private void setBitmapCover(String coverURL){
 		try{
-			if(coverURL.matches("^(https?|ftp)://.*$"))
-				// Remote image
-				this.bitmapCover = getBitmapFromURL(coverURL);
-			else{
-				// Local image
-				this.bitmapCover = getBitmapFromLocal(coverURL);
-			}
+			this.bitmapCover = getBitmapFromURL(coverURL);
 		} catch (Exception ex) {
 			ex.printStackTrace();
+		}
+	}
+
+	// Get image from url
+	private Bitmap getBitmapFromURL(String url){
+		if(url.matches("^(https?|ftp)://.*$"))
+			// Remote image
+			return getBitmapFromRemote(url);
+		else{
+			// Local image
+			return getBitmapFromLocal(url);
 		}
 	}
 
@@ -154,7 +159,7 @@ public class MusicControlsNotification {
 	}
 
 	// get Remote image
-	private Bitmap getBitmapFromURL(String strURL) {
+	private Bitmap getBitmapFromRemote(String strURL) {
 		try {
 			URL url = new URL(strURL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -208,10 +213,15 @@ public class MusicControlsNotification {
 		//Set SmallIcon
 		boolean usePlayingIcon = infos.notificationIcon.isEmpty();
 		if(!usePlayingIcon){
-			int resId = this.getResourceId(infos.notificationIcon, 0);
-			usePlayingIcon = resId == 0;
-			if(!usePlayingIcon) {
-				builder.setSmallIcon(resId);
+			try {
+				int resId = this.getResourceId(infos.notificationIcon, 0);
+				if (resId == 0) {
+					builder.setSmallIcon(Icon.createWithBitmap(this.getBitmapFromURL(infos.notificationIcon)));
+				} else {
+					builder.setSmallIcon(resId);
+				}
+			} catch (Exception ex) {
+				usePlayingIcon = true;
 			}
 		}
 
