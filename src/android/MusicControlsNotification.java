@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
+import java.util.UUID;
 
 import android.util.Log;
 import android.R;
@@ -39,7 +41,7 @@ public class MusicControlsNotification {
 
 	// Public Constructor
 	public MusicControlsNotification(Activity cordovaActivity, int id, Token token){
-		this.CHANNEL_ID = "cordova-plugin-music-controls";
+		this.CHANNEL_ID = UUID.randomUUID().toString();
 		this.notificationID = id;
 		this.cordovaActivity = cordovaActivity;
 		Context context = cordovaActivity;
