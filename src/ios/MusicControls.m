@@ -318,6 +318,10 @@ MusicControlsInfo * musicControlsSettings;
     MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
     [commandCenter.nextTrackCommand removeTarget:self];
     [commandCenter.previousTrackCommand removeTarget:self];
+    [commandCenter.pauseCommand removeTarget:self];
+    [commandCenter.playCommand removeTarget:self];
+    [commandCenter.stopCommand removeTarget:self];
+    [commandCenter.togglePlayPauseCommand removeTarget:self];
     
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_9_0) {
         [commandCenter.changePlaybackPositionCommand setEnabled:false];
