@@ -7,7 +7,9 @@ import org.json.JSONObject;
 public class MusicControlsInfos{
 	public String artist;
   	public String album;
+	public String albumArtist;
 	public String track;
+	public String displayTrackTitle;
 	public String ticker;
 	public String cover;
 	public boolean isPlaying;
@@ -26,8 +28,10 @@ public class MusicControlsInfos{
 		final JSONObject params = args.getJSONObject(0);
 		
 		this.track = params.getString("track");
+		this.displayTrackTitle = params.getString("displayTrackTitle");
 		this.artist = params.getString("artist");
-    		this.album = params.getString("album");
+    	this.album = params.getString("album");
+		this.albumArtist = params.getString("albumArtist");
 		this.ticker = params.getString("ticker");
 		this.cover = params.getString("cover");
 		this.isPlaying = params.getBoolean("isPlaying");

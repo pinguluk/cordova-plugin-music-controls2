@@ -178,10 +178,18 @@ public class MusicControls extends CordovaPlugin {
 					
 					// track title
 					metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_TITLE, infos.track);
+
+					// display title
+            		metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_TITLE, infos.displayTrackTitle != null ? infos.displayTrackTitle : infos.track);
+
 					// artists
 					metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, infos.artist);
+
 					//album
 					metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_ALBUM, infos.album);
+
+ 					// album artist
+            		metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, infos.albumArtist != null ? infos.albumArtist : infos.artist);
 
 					Bitmap art = getBitmapCover(infos.cover);
 					if(art != null){

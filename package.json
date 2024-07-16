@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-music-controls2",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "Music controls for Cordova apps",
   "cordova": {
     "id": "cordova-plugin-music-controls2",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ghenry22/cordova-plugin-music-controls2.git"
+    "url": "git+https://github.com/pinguluk/cordova-plugin-music-controls2.git"
   },
   "keywords": [
     "cordova",
@@ -28,11 +28,11 @@
       "version": ">=6.0.0"
     }
   ],
-  "author": "ghenry22",
+  "author": "pinguluk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ghenry22/cordova-plugin-music-controls2/issues"
+    "url": "https://github.com/pinguluk/cordova-plugin-music-controls2/issues"
   },
   "homepage":
-    "https://github.com/ghenry22/cordova-plugin-music-controls2#readme"
+    "https://github.com/pinguluk/cordova-plugin-music-controls2#readme"
 }

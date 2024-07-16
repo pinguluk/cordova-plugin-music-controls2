@@ -4,7 +4,9 @@ var musicControls = {
   create: function(data, successCallback, errorCallback) {
     data.artist = !isUndefined(data.artist) ? data.artist : "";
     data.track = !isUndefined(data.track) ? data.track : "";
+    data.displayTrackTitle = !isUndefined(data.displayTrackTitle) ? data.displayTrackTitle : data.track;
     data.album = !isUndefined(data.album) ? data.album : "";
+    data.albumArtist = !isUndefined(data.albumArtist) ? data.albumArtist : data.artist;
     data.cover = !isUndefined(data.cover) ? data.cover : "";
     data.ticker = !isUndefined(data.ticker) ? data.ticker : "";
     data.duration = !isUndefined(data.duration) ? data.duration : 0;

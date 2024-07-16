@@ -55,7 +55,7 @@ cordova.commandProxy.add("MusicControls",{
 		} else {
 		    //TODO: Store image locally
 		}
-		mc.displayUpdater.musicProperties.albumArtist = data.artist;
+		mc.displayUpdater.musicProperties.albumArtist = data.albumArtist != null ? : data.albumArtist : data.artist;
 		mc.displayUpdater.musicProperties.albumTitle = (data.album === undefined ? ' ' : data.album);
 		mc.displayUpdater.musicProperties.artist = data.artist;
 		mc.displayUpdater.musicProperties.title = data.track;
