@@ -4,8 +4,8 @@
 
 Music controls for Cordova applications. Display a 'media' notification with play/pause, previous, next buttons, allowing the user to control the play. Handles headset events (plug, unplug, headset button).
 
-This plugin is forked from the original which is no longer maintained but which can be found at:
-https://github.com/homerours/cordova-music-controls-plugin
+This plugin is forked from another fork, which can be found at:
+https://github.com/ghenry22/cordova-plugin-music-controls2
 
 This plugin is renamed as cordova-plugin-music-controls2 for easy differentiation and to allow for publishing
 updates to npm to make life easier for everyone.
@@ -19,15 +19,17 @@ updates to npm to make life easier for everyone.
 - Current release
 `cordova plugin add cordova-plugin-music-controls2`
 - Bleeding edge direct from github
-`cordova plugin add https://github.com/ghenry22/cordova-plugin-music-controls2`
+`cordova plugin add https://github.com/pinguluk/cordova-plugin-music-controls2`
 
 ## Methods
 - Create the media controls:
 ```javascript
 MusicControls.create({
 	track       : 'Time is Running Out',		// optional, default : ''
+	displayTrackTitle: 'Time is Running Out (Live)', // optional, default : track, Android only
 	artist      : 'Muse',						// optional, default : ''
 	album       : 'Absolution',     // optional, default: ''
+	albumArtist : 'Muse',                        // optional, default : artist, Android & Windows only
  	cover       : 'albums/absolution.jpg',		// optional, default : nothing
 	// cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
 	//			 or a remote url ('http://...', 'https://...', 'ftp://...')
