@@ -61,6 +61,7 @@ MusicControls.create({
 	prevIcon: 'media_prev',
 	nextIcon: 'media_next',
 	closeIcon: 'media_close',
+	// a resource Id, local URL (file://) or remote URL (http:// or https:// or ftp://)
 	notificationIcon: 'notification'
 }, onSuccess, onError);
 ```
