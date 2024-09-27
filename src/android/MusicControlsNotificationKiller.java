@@ -39,7 +39,7 @@ public class MusicControlsNotificationKiller extends Service {
 	}
 
 	public void setForeground(Notification notification) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
 			startForeground(this.NOTIFICATION_ID, notification);
 		} else {
 			startForeground(this.NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
