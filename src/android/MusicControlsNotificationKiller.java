@@ -1,13 +1,14 @@
 package com.homerours.musiccontrols;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.Service;
 import android.os.Build;
 import android.os.IBinder;
-import android.os.Binder;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
+import android.util.Log;
 
 public class MusicControlsNotificationKiller extends Service {
 
@@ -15,15 +16,15 @@ public class MusicControlsNotificationKiller extends Service {
 	private NotificationManager mNM;
 	private final IBinder mBinder = new KillBinder(this);
 
-	@Override
+    @Override
 	public IBinder onBind(Intent intent) {
-		this.NOTIFICATION_ID = intent.getIntExtra("notificationID", 1);
+		NOTIFICATION_ID = intent.getIntExtra("notificationID", 1);
 		return mBinder;
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		return Service.START_STICKY;
+        return Service.START_STICKY;
 	}
 
 	@Override
@@ -38,15 +39,21 @@ public class MusicControlsNotificationKiller extends Service {
 		mNM.cancel(NOTIFICATION_ID);
 	}
 
-	public void setForeground(Notification notification) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-			startForeground(this.NOTIFICATION_ID, notification);
-		} else {
-			startForeground(this.NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
-		}
-	}
+    public void setForeground(Notification notification) {
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                startForeground(MusicControlsNotificationKiller.NOTIFICATION_ID, notification);
+            } else {
+				startForeground(MusicControlsNotificationKiller.NOTIFICATION_ID, notification,
+                        ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
+            }
+        } catch (Exception e) {
+            Log.e("MusicControlsNotificationKiller", "Failed to start foreground service: " + e);
+        }
+    }
 
-	public void clearForeground() {
+	@SuppressLint("ObsoleteSdkInt")
+    public void clearForeground() {
 		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
 			return;
 		}
